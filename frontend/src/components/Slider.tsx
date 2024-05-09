@@ -7,7 +7,7 @@ import {
 	stopParking,
 } from "../api";
 import getElapsedTime from "../utils/get-elapsed-time";
-import { ParkingLog } from "../store/types";
+import type { ParkingLog } from "../store/types";
 
 export type RegisterForm = {
 	firstName: string;
@@ -27,7 +27,7 @@ export default function Slider() {
 
 	// fetch parking logs
 	createEffect(async () => {
-		await fetchParkingLogs()
+		await fetchParkingLogs();
 	}, userStore.user);
 
 	// if user has parked then start the timer
@@ -53,6 +53,7 @@ export default function Slider() {
 		setSelectedCity(value);
 		const cityParkingAreas = cityStore.cities.find((e) => e.name === value);
 		if (cityParkingAreas) {
+			// @ts-ignore
 			setParkingAreas(cityParkingAreas.parkingAreas);
 		}
 	};
@@ -60,23 +61,23 @@ export default function Slider() {
 	const fetchParkingLogs = async () => {
 		const result = await fetchUserParkingLogs(userStore.user!.id);
 
-			if (result.status === 200 && result.data) {
-				setParkingLogs(result.data);
-			}
-	}
+		if (result.status === 200 && result.data) {
+			setParkingLogs(result.data);
+		}
+	};
 
 	const handleSubmit = async (e: MouseEvent) => {
 		e.preventDefault();
 
 		if (!selectedCity && !selectedParkingArea) return;
-		
+
 		if (userIsParked()) {
 			setUserIsParked(false);
 
 			await stopParking({
 				userId: userStore.user!.id,
 			});
-			
+
 			return await fetchParkingLogs();
 		}
 
@@ -86,8 +87,6 @@ export default function Slider() {
 			parkingArea: selectedParkingArea(),
 		});
 		return await fetchParkingLogs();
-
-		return;
 	};
 
 	// @ts-ignore timeout return type is causing type conflict
