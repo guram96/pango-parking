@@ -1,0 +1,147 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "Pango test application API",
+		"version": "1.0.0",
+		"title": "Pango Server API"
+	},
+	"host": "localhost:3000",
+	"basePath": "/api",
+	"schemes": ["http"],
+	"paths": {
+		"/user/register": {
+			"post": {
+				"summary": "Register a new user",
+				"description": "A POST endpoint to register a new user with firstname and lastname",
+				"consumes": ["application/json"],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "User's first and last name",
+						"required": true,
+						"schema": {
+							"type": "object",
+							"properties": {
+								"firstName": {
+									"type": "string"
+								},
+								"lastName": {
+									"type": "string"
+								},
+								"email": {
+									"type": "string"
+								},
+								"carPlate": {
+									"type": "string"
+								}
+							},
+							"required": ["firstName", "lastName", "email", "carPlate"]
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "User registered successfully"
+					},
+					"400": {
+						"description": "Invalid input"
+					}
+				}
+			}
+		},
+		"/user/login": {
+			"post": {
+				"summary": "Register a new user",
+				"description": "A POST endpoint to register a new user with firstname and lastname",
+				"consumes": ["application/json"],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "User's first and last name",
+						"required": true,
+						"schema": {
+							"type": "object",
+							"properties": {
+								"email": {
+									"type": "string"
+								}
+							},
+							"required": ["email"]
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "User registered successfully"
+					},
+					"400": {
+						"description": "Invalid input"
+					}
+				}
+			}
+		},
+		"/user/start-parking": {
+			"post": {
+				"summary": "Start parking for a user",
+				"description": "A POST endpoint to start parking for a user based on user ID and parking area.",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "User parking details",
+						"required": true,
+						"schema": {
+							"type": "object",
+							"properties": {
+								"userId": {
+									"type": "number"
+								},
+								"parkingArea": {
+									"type": "string"
+								}
+							},
+							"required": ["firstName", "lastName", "email", "carPlate"]
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Parking started successfully",
+						"schema": {}
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/user/parking-logs/{userId}": {
+			"get": {
+				"summary": "Register a new user",
+				"description": "A POST endpoint to register a new user with firstname and lastname",
+				"consumes": ["application/json"],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"description": "User's first and last name",
+						"required": true,
+						"type": "integer"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "User registered successfully"
+					},
+					"400": {
+						"description": "Invalid input"
+					}
+				}
+			}
+		}
+	}
+}

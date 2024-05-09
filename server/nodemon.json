@@ -1,0 +1,11 @@
+{
+	"execMap": {
+		"ts": "ts-node src/app.ts",
+		"swc": true
+	},
+	"ext": "ts",
+	"verbose": true,
+	"watch": ["src/**/*.ts", "swagger.json"],
+	"exec": "'ts-node'  src/app.ts",
+	"inspect": true
+}

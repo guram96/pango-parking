@@ -1,0 +1,47 @@
+{
+	"name": "pangotest",
+	"version": "1.0.0",
+	"description": "",
+	"main": "dist/app.js",
+	"scripts": {
+		"start": "ts-node src/app.ts",
+		"start:prod": "node dist/src/app.js",
+		"dev": "nodemon",
+		"lint-format": "npx @biomejs/biome check --apply .",
+		"typeorm": "typeorm-ts-node-commonjs",
+		"build": "./node_modules/typescript/bin/ts",
+		"docker:up": "docker-compose up -d && npm run docker:shell",
+		"docker:down": "docker-compose down",
+		"docker:shell": "docker exec -it api sh",
+		"docker:build": "docker build -t pango-api ."
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@biomejs/biome": "1.7.2",
+		"@swc/core": "^1.4.17",
+		"@types/express": "^4.17.21",
+		"@types/node": "^16.11.10",
+		"ts-node": "10.9.1",
+		"typescript": "4.5.2"
+	},
+	"dependencies": {
+		"body-parser": "^1.20.2",
+		"class-transformer": "^0.5.1",
+		"class-validator": "^0.14.1",
+		"compression": "^1.7.4",
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
+		"error-handler": "^1.0.0",
+		"express": "^4.19.2",
+		"helmet": "^7.1.0",
+		"morgan": "^1.10.0",
+		"pg": "^8.4.0",
+		"reflect-metadata": "^0.1.13",
+		"swagger-ui-express": "^5.0.0",
+		"typeorm": "0.3.20",
+		"winston": "^3.13.0",
+		"winston-daily-rotate-file": "^5.0.0"
+	}
+}

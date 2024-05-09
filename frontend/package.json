@@ -1,0 +1,31 @@
+{
+  "name": "pango-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@modular-forms/solid": "^0.20.0",
+    "@solidjs/router": "^0.13.3",
+    "solid-js": "^1.8.15"
+  },
+  "devDependencies": {
+    "@solidjs/testing-library": "^0.8.5",
+    "@testing-library/jest-dom": "^6.2.0",
+    "@types/testing-library__jest-dom": "^5.14.9",
+    "jsdom": "^23.2.0",
+    "sass": "^1.76.0",
+    "solid-devtools": "^0.29.3",
+    "solid-dom-testing": "^0.0.3",
+    "solid-register": "^0.2.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-solid": "^2.10.2",
+    "vitest": "^1.6.0"
+  }
+}

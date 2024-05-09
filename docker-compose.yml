@@ -1,0 +1,51 @@
+services:
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: pango-api
+    image: node:22-alpine
+    env_file: 
+      - ./server/.env
+    ports:
+      - "3000:3000"
+    # depends_on:
+    #   - db
+    working_dir: /app
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - PORT=${PORT}
+      - DB_TYPE=${DB_TYPE}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+    stdin_open: true 
+    tty: true
+
+
+  client:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: pango-frontend
+    ports:
+      - "3001:80"
+  db:
+    container_name: pango-postgres
+    image: postgres:16-alpine
+    env_file: ./server/.env
+    ports:
+      - '8001:5432'
+    volumes:
+      - data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=@Webdisigner1996
+      - POSTGRES_DB=pangotest
+
+
+volumes:
+  data:
+   
