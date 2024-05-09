@@ -9,7 +9,7 @@
 		"dev": "nodemon",
 		"lint-format": "npx @biomejs/biome check --apply .",
 		"typeorm": "typeorm-ts-node-commonjs",
-		"build": "./node_modules/typescript/bin/ts",
+		"build": "tsc",
 		"docker:up": "docker-compose up -d && npm run docker:shell",
 		"docker:down": "docker-compose down",
 		"docker:shell": "docker exec -it api sh",
