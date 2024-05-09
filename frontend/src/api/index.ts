@@ -1,9 +1,7 @@
 import type { LoginForm } from "../pages/Login";
 import type { RegisterForm } from "./../pages/SignUp";
 
-// TODO: move this to env file
-const API_URL = "http://localhost:3000";
-
+const API_URL = import.meta.env.API_URL;
 export const fetchCities = async () => {
 	const response = await fetch(`${API_URL}/api/city/all`);
 	return response.json();
