@@ -26,20 +26,29 @@ services:
     tty: true
 
 
-  client:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: pango-frontend
-    restart: always
+  # client:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: pango-frontend
+  #   restart: always
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   volumes:
+  #     - ./nginx/conf/:/etc/nginx/conf.d/:ro
+  #     - ./certbot/www/:/var/www/certbot/:ro
+  #   environment:
+  #     - API_URL=${API_URL}
+  webserver:
+    image: nginx:latest
     ports:
       - 80:80
       - 443:443
+    restart: always
     volumes:
       - ./nginx/conf/:/etc/nginx/conf.d/:ro
       - ./certbot/www/:/var/www/certbot/:ro
-    environment:
-      - API_URL=${API_URL}
   certbot:
     image: certbot/certbot:latest
     volumes:
