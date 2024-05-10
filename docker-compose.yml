@@ -5,12 +5,13 @@ services:
       dockerfile: Dockerfile
     container_name: pango-api
     image: node:22-alpine
-    env_file: 
+    restart: always
+    env_file:
       - ./server/.env
     ports:
       - "3000:3000"
-    # depends_on:
-    #   - db
+    depends_on:
+       - db
     working_dir: /app
     environment:
       - NODE_ENV=${NODE_ENV}
@@ -21,7 +22,7 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
-    stdin_open: true 
+    stdin_open: true
     tty: true
 
 
@@ -30,12 +31,25 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: pango-frontend
+    restart: always
     ports:
-      - "3001:80"
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+      - ./certbot/www/:/var/www/certbot/:ro
+    environment:
+      - API_URL=${API_URL}
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
   db:
     container_name: pango-postgres
     image: postgres:16-alpine
     env_file: ./server/.env
+    restart: always
     ports:
       - '8001:5432'
     volumes:
@@ -48,4 +62,3 @@ services:
 
 volumes:
   data:
-   
